@@ -22,7 +22,7 @@ def safe_name(input):
 
 def change_to_safename(dirname, entry, fp):
     safe = safe_name(entry.name)
-    fp.write('<a href="{0}/{1}" >{1}</a><br />'.format(dirname,safe))
+    fp.write('<a href="{0}/{1}" >{1}</a><br />\n'.format(dirname,safe))
     if safe != '' and (not os.path.exists(dirname+'/'+safe)):
         os.rename(entry.path, dirname+'/'+safe)
         return dirname+'/'+safe
@@ -44,6 +44,7 @@ def main():
     with open(indexFile, 'w') as fp:
         fp.write('<html><head><title>Index</title></head><body>\n')
         recurse('.', fp)
+        fp.write('</body></html>')
     print('done')
 
 if __name__ == '__main__':
