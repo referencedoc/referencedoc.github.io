@@ -22,7 +22,7 @@ def safe_name(input):
 
 def change_to_safename(dirname, entry, fp):
     safe = safe_name(entry.name)
-    fp.write('<a href="{0}/{1}" >{1}</a><br />\n'.format(dirname,safe))
+    fp.write('<li><a href="{0}/{1}" >{1}</a></li>\n'.format(dirname,safe))
     if safe != '' and (not os.path.exists(dirname+'/'+safe)):
         os.rename(entry.path, dirname+'/'+safe)
         return dirname+'/'+safe
@@ -42,9 +42,9 @@ def main():
     assert len(sys.argv) > 1, 'put any argument it doesn\'t matter. Filenames will be changed to windows safe.'
     indexFile = 'index.html'
     with open(indexFile, 'w') as fp:
-        fp.write('<html><head><title>Index</title></head><body>\n')
+        fp.write('<html><head><title>Index</title></head><body>\n<ol>')
         recurse('.', fp)
-        fp.write('</body></html>')
+        fp.write('</ol>\n</body></html>')
     print('done')
 
 if __name__ == '__main__':
