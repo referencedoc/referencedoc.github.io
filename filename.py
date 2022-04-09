@@ -32,7 +32,7 @@ def change_to_safename(dirname, entry, fp):
 
 
 def recurse(dirname, fp):
-    for entry in os.scandir(dirname):
+    for entry in sorted(os.scandir(dirname), key=lambda x: (x.is_dir(), x.name)):
         if not entry.name.startswith('.'): 
             newName = change_to_safename(dirname,entry,fp)
             if entry.is_dir():
